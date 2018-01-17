@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/react-bootstrap": "^0.31.9",
     "@types/react-router-dom": "^4.2.3",
+    "jest-environment-node": "^20.0.3",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.0",
     "react-dom": "^16.2.0",
