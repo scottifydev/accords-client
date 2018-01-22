@@ -17,13 +17,13 @@ export default class Login extends Component {
 
         this.state = {
             isLoading: false,
-            email: "",
+            username: "",
             password: ""
         };
     }
 
     validateForm() {
-        return this.state.email.length > 0 && this.state.password.length > 0;
+        return this.state.username.length > 0 && this.state.password.length > 0;
     }
 
     handleChange = event => {
@@ -38,7 +38,7 @@ export default class Login extends Component {
         this.setState({ isLoading: true });
 
         try {
-            await this.login(this.state.email, this.state.password);
+            await this.login(this.state.username, this.state.password);
             this.props.userHasAuthenticated(true);
             this.props.history.push("/");
         } catch (e) {
@@ -47,13 +47,13 @@ export default class Login extends Component {
         }
     }
 
-    login(email, password) {
+    login(username, password) {
         const userPool = new CognitoUserPool({
             UserPoolId: config.cognito.USER_POOL_ID,
             ClientId: config.cognito.APP_CLIENT_ID
         });
-        const user = new CognitoUser({ Username: email, Pool: userPool });
-        const authenticationData = { Username: email, Password: password };
+        const user = new CognitoUser({ Username: username, Pool: userPool });
+        const authenticationData = { Username: username, Password: password };
         const authenticationDetails = new AuthenticationDetails(authenticationData);
 
         return new Promise((resolve, reject) =>
@@ -71,12 +71,12 @@ export default class Login extends Component {
         return (
             <div className="Login">
                 <form onSubmit={this.handleSubmit}>
-                    <FormGroup controlId="email" bsSize="large">
-                        <ControlLabel>Email</ControlLabel>
+                    <FormGroup controlId="username" bsSize="large">
+                        <ControlLabel>username</ControlLabel>
                         <FormControl
                             autoFocus
-                            type="email"
-                            value={this.state.email}
+                            type="username"
+                            value={this.state.username}
                             onChange={this.handleChange}
                         />
                     </FormGroup>
