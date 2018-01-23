@@ -30,8 +30,12 @@ export function signOutUser() {
     if (currentUser !== null) {
         currentUser.signOut();
     }
-}
 
+    if (AWS.config.credentials) {
+        AWS.config.credentials.clearCachedId();
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({});
+    }
+}
 function getUserToken(currentUser) {
     return new Promise((resolve, reject) => {
         currentUser.getSession(function (err, session) {
@@ -93,10 +97,11 @@ export async function invokeApig({
             queryParams,
             body
         });
-    body.username = getCurrentUser().username
+    if (method == "POST") {
+        body.username = getCurrentUser().username
+    }
     body = body ? JSON.stringify(body) : body;
     headers = signedRequest.headers;
-    console.log(queryParams)
     const results = await fetch(signedRequest.url, {
         method,
         headers,
@@ -107,6 +112,5 @@ export async function invokeApig({
     if (results.status !== 200) {
         throw new Error(await results.text());
     }
-    console.log(results)
-    return results;
+    return results.json();
 }
