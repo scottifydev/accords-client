@@ -28,6 +28,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    console.log(authUser())
     try {
       if (await authUser()) {
         this.userHasAuthenticated(true);
@@ -52,21 +53,24 @@ render() {
       <Navbar fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/">Home</Link>
+            <Link to="/">Project: Reddington</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
+            <RouteNavItem key={1} href="/proposals">
+              Proposals
+            </RouteNavItem>
             {this.state.isAuthenticated
               ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
               : [
-                <RouteNavItem key={1} href="/signup">
+                <RouteNavItem key={2} href="/signup">
                   Signup
-      </RouteNavItem>,
-                <RouteNavItem key={2} href="/login">
+            </RouteNavItem>,
+                <RouteNavItem key={3} href="/login">
                   Login
-      </RouteNavItem>
+            </RouteNavItem>
               ]}
           </Nav>
         </Navbar.Collapse>

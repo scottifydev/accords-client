@@ -12,7 +12,6 @@ export async function authUser() {
     }
 
     const currentUser = getCurrentUser();
-
     if (currentUser === null) {
         return false;
     }
@@ -48,11 +47,12 @@ function getUserToken(currentUser) {
     });
 }
 
-function getCurrentUser() {
+export function getCurrentUser() {
     const userPool = new CognitoUserPool({
         UserPoolId: config.cognito.USER_POOL_ID,
         ClientId: config.cognito.APP_CLIENT_ID
     });
+
     return userPool.getCurrentUser();
 }
 

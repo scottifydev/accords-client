@@ -1,6 +1,6 @@
 export default {
     apiGateway: {
-        URL: "http://localhost:3000",
+        URL: "http://localhost:3001",
         REGION: "us-east-1"
     },
     cognito: {

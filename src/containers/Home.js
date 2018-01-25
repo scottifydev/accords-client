@@ -28,7 +28,7 @@ export default class Home extends Component {
     }
 
     protocols() {
-        return invokeApig({ path: "/protocols" });
+        return invokeApig({ path: "/get/protocols" });
     }
 
     renderProtocolsList(protocols) {
@@ -37,24 +37,14 @@ export default class Home extends Component {
         for (let i=0; i < protocols.Count; i++) {
             arry.push(<ListGroupItem
                 key={protocols.Items[i].protocolNumber}
-                href={`/protocols/${protocols.Items[i].protocolNumber}`}
+                href={`/protocol/${protocols.Items[i].protocolNumber}`}
                 onClick={this.handleprotocolClick}
-                header={protocols.Items[i].content.trim().split("\n")}
+                header={`no. ${protocols.Items[i].protocolNumber} - ${protocols.Items[i].content.trim().split("\n")}`}
                 >
-                    {"Created: " + new Date(protocols.Items[i].createdAt).toLocaleString()}
+                {"Proposed by: " + protocols.Items[i].userId + " and " + "ratified by: " + protocols.Items[i].ratifiedBy + " at " + new Date(protocols.Items[i].ratifiedDate).toLocaleString() + " Review on: " + new Date(protocols.Items[i].reviewDate).toLocaleString()}
                 </ListGroupItem>
             );
         }
-        arry.push(  <ListGroupItem
-                    key="new"
-                    href="/protocols/new"
-                    onClick={this.handleprotocolProtocolClick}
-                >
-                <h4>
-                    <b>{"\uFF0B"}</b> Propose New Protocol
-                </h4>
-                </ListGroupItem>
-        )
         console.log(arry)
         return arry
     }
