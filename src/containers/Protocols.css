@@ -2,7 +2,85 @@
   padding-bottom: 15px;
 }
 
-.Protocols form textarea {
-  height: 300px;
+.protocol .no {
+  text-align: center;
+  padding-top: 100px!important;
+}
+
+.no {
+  position: relative;
+  top: 2px;
+  font-size: 20px;
+}
+
+
+.protocol {
+    font-family: Courier New,
+    Courier,
+    monospace;
   font-size: 24px;
+  font-weight: 300
+}
+.comment {
+  padding: 10px
+}
+
+.comment-header {
+  font-weight: 600
+}
+
+.comment-username {
+  font-weight: 300;
+  color: blue
+}
+
+.comment-text {
+  padding: 10px;
+  font-family: Courier New, Courier, monospace
+}
+
+.comment-date {
+  font-size: 9px;
+  color: gray;
+  padding-top: 2px;
+}
+
+.comments {
+  overflow-y: scroll;
+  max-height: 50vh;
+}
+
+textarea, .form-control {
+  height: 100px;
+  font-size: 24px;
+  background : rgba(157, 72, 210, 0.12);
+  font-size: 14px!important;
+  color: rgb(133, 187, 95);
+  border: 1px solid #333333;
+}
+
+.form-control:focus {
+  border-color:rgba(157, 72, 210, 0.12);
+}
+
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: none
+}
+
+::-webkit-scrollbar-thumb {
+  background : rgba(133, 187, 95, 0.844);
+}
+
+.comments:hover::-webkit-scrollbar-track:hover {
+  background: rgba(157, 72, 210, 0.12);
+
+}
+
+.comments:hover::-webkit-scrollbar-thumb:hover {
+  background: rgb(133, 187, 95);
 }

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, FormControl } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import { getCurrentUser, invokeApig } from "../libs/awsLib";
-import config from "../config";
+// import config from "../config";
 import "./Protocols.css";
 
 export default class Proposals extends Component {
@@ -181,7 +181,7 @@ export default class Proposals extends Component {
                                 componentClass="textarea"
                             />
                         </FormGroup>
-                        {this.state.userId == this.state.currentUser 
+                        {this.state.userId === this.state.currentUser 
                         ?<LoaderButton
                             block
                             bsStyle="primary"
@@ -203,7 +203,7 @@ export default class Proposals extends Component {
                             text="Amend"
                             loadingText="Amending…"
                         />}
-                        {this.state.userId == this.state.currentUser 
+                        {this.state.userId === this.state.currentUser 
                         ?<LoaderButton
                             block
                             bsStyle="danger"

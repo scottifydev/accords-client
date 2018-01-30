@@ -8,7 +8,7 @@ import {
     AuthenticationDetails,
     CognitoUser
 } from "amazon-cognito-identity-js";
-import AWS from "aws-sdk";
+// import AWS from "aws-sdk";
 
 
 export default class Login extends Component {

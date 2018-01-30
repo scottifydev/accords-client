@@ -97,7 +97,7 @@ export async function invokeApig({
             queryParams,
             body
         });
-    if (method == "POST") {
+    if (method === "POST") {
         body.username = getCurrentUser().username
     }
     body = body ? JSON.stringify(body) : body;

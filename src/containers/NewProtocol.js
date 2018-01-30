@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, FormControl } from "react-bootstrap";
 import { invokeApig } from "../libs/awsLib";
 import LoaderButton from "../components/LoaderButton";
-import config from "../config";
+// import config from "../config";
 import "./NewProtocol.css";
 
 export default class NewProtocol extends Component {
@@ -34,7 +34,7 @@ export default class NewProtocol extends Component {
             await this.createProtocol({
                 content: this.state.content
             });
-            this.props.history.push("/");
+            this.props.history.push("/proposals/");
         } catch (e) {
             alert(e);
             this.setState({ isLoading: false });
@@ -43,7 +43,7 @@ export default class NewProtocol extends Component {
     
     createProtocol(protocol) {
         return invokeApig({
-            path: "/submit-proposal",
+            path: "/proposal/submit",
             method: "POST",
             body: protocol
         });

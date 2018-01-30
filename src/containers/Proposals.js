@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 import { invokeApig } from '../libs/awsLib';
 import "./Home.css";
-
+import Typist from 'react-typist';
+import LinkContainer from "react-router-bootstrap/lib/LinkContainer";
 export default class Proposals extends Component {
     constructor(props) {
         super(props);
@@ -36,9 +37,9 @@ export default class Proposals extends Component {
         let arry = []
         for (let i = 0; i < proposals.Count; i++) {
             arry.push(
+                <LinkContainer to={`/proposal/${proposals.Items[i].userId}/${proposals.Items[i].proposalId}`}>
                 <ListGroupItem
                     key={proposals.Items[i].proposalId}
-                    href={`/proposal/${proposals.Items[i].userId}/${proposals.Items[i].proposalId}`}
                     onClick={this.handleproposalClick}
                     header={proposals.Items[i].content.trim().split("\n")}
                 >
@@ -47,16 +48,17 @@ export default class Proposals extends Component {
                     ?`Amened by: ${proposals.Items[i].amendedBy} at ${new Date(proposals.Items[i].amendedDate).toLocaleString()}`
                     :` `}
                 </ListGroupItem>
+                </LinkContainer>
             );
         }
         arry.push(
             <ListGroupItem
                 key="new"
                 href="/proposals/new"
-                onClick={this.handleNoteClick}
+                onClick={this.handleProposalClick}
             >
                 <h4>
-                    <b>{"\uFF0B"}</b> Create a new note
+                    <b>{"\uFF0B"}</b> Propose a new protocol
             </h4>
             </ListGroupItem>
         )
@@ -80,9 +82,26 @@ export default class Proposals extends Component {
     }
 
     renderProposals() {
+        let avgTypingDelay = 20
+        let stdTypingDelay = 0
         return (
             <div className="proposals">
-                <PageHeader>Proposals</PageHeader>
+                <PageHeader>
+                    <Typist
+                        cursor={{
+                            show: true,
+                            blink: true,
+                            element: '_',
+                            hideWhenDone: false,
+                            hideWhenDoneDelay: 1000,
+                        }}
+                        avgTypingDelay={avgTypingDelay}
+                        stdTypingDelay={stdTypingDelay}
+                    >
+                        <Typist.Delay ms={1500} />
+                        Proposals
+                    </Typist>
+                </PageHeader>
                 <ListGroup>
                     {!this.state.isLoading && this.renderProposalsList(this.state.proposals)}
                 </ListGroup>

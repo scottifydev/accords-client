@@ -4,6 +4,7 @@ import { Nav, NavItem, Navbar } from "react-bootstrap";
 import RouteNavItem from "./components/RouteNavItem";
 import Routes from "./Routes";
 import { authUser, signOutUser } from "./libs/awsLib";
+import { LinkContainer } from 'react-router-bootstrap';
 import "./App.css";
 
 class App extends Component {
@@ -12,7 +13,8 @@ class App extends Component {
 
     this.state = {
       isAuthenticated: false,
-      isAuthenticating: true
+      isAuthenticating: true,
+      isOn: false
     };
   }
 
@@ -39,7 +41,24 @@ class App extends Component {
     }
 
     this.setState({ isAuthenticating: false });
+    document.onkeydown = evt => {
+      evt = evt || window.event;
+      if (evt.keyCode === 27) {
+        if (this.state.isOn === true ) {
+          document.getElementById('root').style.webkitAnimationName = 'turn-off';
+          document.getElementById('root').style.webkitAnimationDuration = '2s'
+          document.getElementById('root').style.webkitAnimationFillMode = 'forwards'
+          this.state.isOn = false;
+        } else if (this.state.isOn === false) {
+          this.state.isOn = true
+          // document.getElementById('root').style.webkitAnimationName = '';
+          document.getElementById('root').style.webkitAnimationName = 'turn-on';
+        }
+      }
+    };
   }
+
+
 
 render() {
   const childProps = {
@@ -49,7 +68,7 @@ render() {
 
   return (
     !this.state.isAuthenticating &&
-    <div className="App container">
+    <div className="App container crt">
       <Navbar fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
@@ -59,9 +78,9 @@ render() {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            <RouteNavItem key={1} href="/proposals">
-              Proposals
-            </RouteNavItem>
+            <LinkContainer to="/proposals">
+            <NavItem key={1}>Proposals</NavItem>
+            </LinkContainer>
             {this.state.isAuthenticated
               ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
               : [

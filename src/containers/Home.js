@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
+import { LinkContainer } from 'react-router-bootstrap';
 import { invokeApig } from '../libs/awsLib';
+import Typist from 'react-typist';
 import "./Home.css";
 
 export default class Home extends Component {
@@ -35,14 +37,21 @@ export default class Home extends Component {
         console.log(protocols)
         let arry = []
         for (let i=0; i < protocols.Count; i++) {
-            arry.push(<ListGroupItem
+            let protocolText = "[ no. " + protocols.Items[i].protocolNumber + " ]  " + protocols.Items[i].content.trim().split("\n")
+            arry.push(
+                <LinkContainer to={`/protocol/${protocols.Items[i].protocolNumber}`}>
+                <ListGroupItem
                 key={protocols.Items[i].protocolNumber}
-                href={`/protocol/${protocols.Items[i].protocolNumber}`}
                 onClick={this.handleprotocolClick}
-                header={`no. ${protocols.Items[i].protocolNumber} - ${protocols.Items[i].content.trim().split("\n")}`}
+                header={protocolText}
                 >
-                {"Proposed by: " + protocols.Items[i].userId + " and " + "ratified by: " + protocols.Items[i].ratifiedBy + " at " + new Date(protocols.Items[i].ratifiedDate).toLocaleString() + " Review on: " + new Date(protocols.Items[i].reviewDate).toLocaleString()}
+                {"Proposed by: " + protocols.Items[i].userId}
+                <br />
+                {"Ratified by: " + protocols.Items[i].ratifiedBy + " at " + new Date(protocols.Items[i].ratifiedDate).toLocaleString()}
+                <br />
+                {" Review on: " + new Date(protocols.Items[i].reviewDate).toLocaleString()}
                 </ListGroupItem>
+                </LinkContainer>
             );
         }
         console.log(arry)
@@ -58,16 +67,41 @@ export default class Home extends Component {
     renderLander() {
         return (
             <div className="lander">
-                <h1>Project Reddington:</h1>
-                <p>Protocols</p>
+                    <Typist
+                        cursor={{
+                            show: false,
+                        }}
+                    >
+                    <Typist.Delay ms={1500} />
+                    <h1>Project Reddington:</h1>
+                    <Typist.Delay ms={200} />
+                    <p>Protocols</p>
+                    </Typist>
             </div>
         );
     }
-
+    
     renderProtocols() {
+        let avgTypingDelay = 20
+        let stdTypingDelay = 0
         return (
             <div className="protocols">
-                <PageHeader>Protocols</PageHeader>
+                <PageHeader>
+                    <Typist
+                        cursor={{
+                            show: true,
+                            blink: true,
+                            element: '_',
+                            hideWhenDone: false,
+                            hideWhenDoneDelay: 1000,
+                        }}
+                        avgTypingDelay={avgTypingDelay}
+                        stdTypingDelay={stdTypingDelay}
+                    >
+                    <Typist.Delay ms={1500} />
+                        Protocols
+                    </Typist>
+                </PageHeader>
                 <ListGroup>
                     {!this.state.isLoading && this.renderProtocolsList(this.state.protocols)}
                 </ListGroup>
@@ -78,7 +112,7 @@ export default class Home extends Component {
     render() {
         return (
             <div className="Home">
-                {this.props.isAuthenticated ? this.renderProtocols() : this.renderLander()}
+                    {this.props.isAuthenticated ? this.renderProtocols() : this.renderLander()}
             </div>
         );
     }
