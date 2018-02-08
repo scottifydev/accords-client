@@ -29,7 +29,7 @@ export default class Proposals extends Component {
     }
 
     proposals() {
-        return invokeApig({ path: "/get/proposals" });
+        return invokeApig({ path: "/proposals" });
     }
 
     renderProposalsList(proposals) {

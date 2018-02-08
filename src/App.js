@@ -72,24 +72,27 @@ render() {
       <Navbar fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/">Project: Reddington</Link>
+            <Link to="/">Accords: Home Managment System</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            <LinkContainer to="/proposals">
-            <NavItem key={1}>Proposals</NavItem>
-            </LinkContainer>
             {this.state.isAuthenticated
-              ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
+              ? [<LinkContainer to="/proposals">
+                  <RouteNavItem key={1}>Proposals</RouteNavItem>
+                </LinkContainer>,
+                <LinkContainer to="/actions">
+                  <RouteNavItem key={2}>Actions</RouteNavItem>
+                </LinkContainer>,
+                <LinkContainer to="/dossiers">
+                  <RouteNavItem key={3}>Dossiers</RouteNavItem>
+                </LinkContainer>,
+                <NavItem key="4" onClick={this.handleLogout}>Logout</NavItem>
+              ]
               : [
-                <RouteNavItem key={2} href="/signup">
-                  Signup
-            </RouteNavItem>,
-                <RouteNavItem key={3} href="/login">
-                  Login
-            </RouteNavItem>
+                <RouteNavItem key={2} href="/signup">Signup</RouteNavItem>,
+                <RouteNavItem key={3} href="/login">Login</RouteNavItem>
               ]}
           </Nav>
         </Navbar.Collapse>

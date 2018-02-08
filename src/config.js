@@ -1,6 +1,6 @@
 export default {
     apiGateway: {
-        URL: "https://protocols.scottify.io",
+        URL: "https://api.scottify.io",
         // URL: "http://localhost:3000",
         REGION: "us-east-1"
     },

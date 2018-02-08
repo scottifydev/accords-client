@@ -11,6 +11,7 @@ import NewProtocol from "./containers/NewProtocol";
 import Protocols from "./containers/Protocols";
 import Proposals from "./containers/Proposals"
 import Proposal from "./containers/Proposal"
+import Dossiers from "./containers/Dossiers"
 
 export default ({ childProps }) =>
     <Switch>
@@ -21,6 +22,7 @@ export default ({ childProps }) =>
         <AuthenticatedRoute path="/proposal/:userId/:proposalId" exact component={Proposal} props={childProps} />
         <AuthenticatedRoute path="/proposals/new" exact component={NewProtocol} props={childProps} />
         <AuthenticatedRoute path="/protocol/:id" exact component={Protocols} props={childProps} />
+        <AuthenticatedRoute path="/dossiers" exact component={Dossiers} props={childProps} />
         { /* Finally, catch all unmatched routes */}
         <Route component={NotFound} />
     </Switch>;
