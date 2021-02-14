@@ -75,7 +75,7 @@ export default class Home extends Component {
                     <Typist.Delay ms={1500} />
                     <h1>Accords:</h1>
                     <Typist.Delay ms={200} />
-                    <p>Home Management System</p>
+                    <p>Organization Management System</p>
                     </Typist>
             </div>
         );

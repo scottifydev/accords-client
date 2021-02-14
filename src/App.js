@@ -72,7 +72,7 @@ render() {
       <Navbar fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/">Accords: Home Managment System</Link>
+            <Link to="/">Accords: Organization Managment System</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
